@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>🎉 Surprise!</title>
+  <style>
+    body {
+      background: linear-gradient(to right, #a1c4fd, #c2e9fb);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      text-align: center;
+      padding: 50px;
+      color: #333;
+      overflow-x: hidden;
+    }
+
+    h1 {
+      font-size: 3.5em;
+      color: #ff4081;
+    }
+
+    p {
+      font-size: 1.5em;
+      margin-top: 10px;
+    }
+
+    .main-photo {
+      margin: 40px auto;
+      max-width: 600px;
+      height: auto;
+      border: 8px solid #fff;
+      border-radius: 20px;
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+    }
+
+    .photo-caption {
+      font-size: 1.3em;
+      color: #555;
+      margin-top: 15px;
+    }
+
+    .back-button {
+      margin-top: 40px;
+      padding: 12px 24px;
+      font-size: 1em;
+      background-color: #2196F3;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    h2 {
+      margin-top: 60px;
+      font-size: 2em;
+      color: #ff4081;
+    }
+
+    /* Balloon game styles */
+    #balloon {
+      display: none;
+      position: absolute;
+      width: 80px;
+      cursor: pointer;
+      animation: float 5s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0% {
+        bottom: 0;
+        left: 10%;
+      }
+
+      50% {
+        bottom: 50%;
+        left: 50%;
+      }
+
+      100% {
+        bottom: 100%;
+        left: 80%;
+      }
+    }
+
+    /* Secret surprise button in bottom-right corner */
+    #secretButton {
+      position: fixed;
+      bottom: 15px;
+      right: 15px;
+      background: none;
+      border: none;
+      font-size: 20px;
+      cursor: pointer;
+      opacity: 0.3;
+      transition: opacity 0.3s;
+      z-index: 1000;
+    }
+
+    #secretButton:hover {
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+  <h1>🎊 Surprise! 🎊</h1>
+  <p>You're the star today — shine bright and enjoy every moment!</p>
+
+  <!-- Big photo -->
+  <img src="https://cdn.pixabay.com/photo/2021/04/20/10/23/woman-6192953_960_720.jpg" alt="Birthday Person" class="main-photo" />
+  <div class="photo-caption">🌟 The Birthday Star 🌟</div>
+
+  <!-- Game 1: Guess the Number -->
+  <h2>🎲 Guess the Number (1–10)</h2>
+  <p>Can you guess the secret number?</p>
+  <input type="number" id="guess" min="1" max="10" />
+  <button onclick="checkGuess()">Guess</button>
+  <p id="guessResult"></p>
+
+  <!-- Game 2: Click the Balloon -->
+  <h2>🎈 Click the Floating Balloon!</h2>
+  <p>Click it as fast as you can when it appears:</p>
+  <img
+    src="https://cdn.pixabay.com/photo/2016/11/22/19/31/balloons-1852926_960_720.jpg"
+    id="balloon"
+    alt="Balloon"
+    onclick="popBalloon()"
+  />
+  <p id="balloonMessage"></p>
+
+  <!-- Back button -->
+  <br /><br />
+  <a href="birthday.html" class="back-button">🔙 Go Back</a>
+
+  <!-- Secret surprise button -->
+  <button id="secretButton" onclick="location.href='secret-gallery.html'">🎁</button>
+
+  <script>
+    // Game 1: Guess the number
+    const secretNumber = Math.floor(Math.random() * 10) + 1;
+
+    function checkGuess() {
+      const userGuess = parseInt(document.getElementById('guess').value);
+      const result = document.getElementById('guessResult');
+
+      if (userGuess === secretNumber) {
+        result.textContent = '🎉 Correct! You guessed it!';
+        result.style.color = 'green';
+      } else {
+        result.textContent = '❌ Nope, try again!';
+        result.style.color = 'red';
+      }
+    }
+
+    // Game 2: Balloon pop
+    const balloon = document.getElementById('balloon');
+    const message = document.getElementById('balloonMessage');
+
+    setTimeout(() => {
+      balloon.style.display = 'block';
+    }, 2000);
+
+    function popBalloon() {
+      balloon.style.display = 'none';
+      message.textContent = '🎉 You popped the balloon!';
+    }
+  </script>
+</body>
+</html>
